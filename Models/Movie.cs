@@ -10,6 +10,7 @@ namespace IntroToLINQandASPLabs.Models
 
         private readonly DateTime _releaseDate;
         public DateTime ReleaseDate { get { return _releaseDate; } }
+        public string ReleaseDateShort { get { return _releaseDate.ToString("yyyy-MMM"); } }
 
         private string _title;
         public string Title { get { return _title; } }
@@ -20,12 +21,12 @@ namespace IntroToLINQandASPLabs.Models
         private readonly int _budget;
         public int Budget { get { return _budget; } }
 
-        private HashSet<Role> _roles;
+        private HashSet<Role> _roles = new HashSet<Role>();
         public void AddRole(Role role)
         {
             _roles.Add(role);
         }
-        private HashSet<Rating> _rating;
+        private HashSet<Rating> _rating = new HashSet<Rating>();
 
         public void AddRating(Rating rating)
         {
@@ -35,7 +36,7 @@ namespace IntroToLINQandASPLabs.Models
 
 
 
-        public Movie( string title, string genre, DateTime releaseDate)
+        public Movie( string title, string genre, DateTime releaseDate, int budget)
         {
             _id = Context.GetNextId();
 
@@ -51,6 +52,7 @@ namespace IntroToLINQandASPLabs.Models
 
             _releaseDate = releaseDate;
 
+            _budget = budget;
         }
 
         

@@ -18,6 +18,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.ReleaseDate)
             </th>
+            <th>
+                Details
+            </th>
             
         </tr>
     </thead>
@@ -32,10 +35,10 @@
                     @Html.DisplayFor(modelItem => item.Genre)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ReleaseDate)
+                    @Html.DisplayFor(modelItem => item.ReleaseDateShort)
                 </td>
                 <td>
-                    <a asp-action="Details" asp-route-movieid="@item.Id">Details</a>
+                    <a asp-action="GetMovieInfo" asp-route-movieid="@item.Id">Details</a>
                 </td>
 
             </tr>

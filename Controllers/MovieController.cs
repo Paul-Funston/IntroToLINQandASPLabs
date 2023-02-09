@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using IntroToLINQandASPLabs.Models;
 using IntroToLINQandASPLabs.Data;
+using Microsoft.CodeAnalysis;
 
 namespace IntroToLINQandASPLabs.Controllers
 {
@@ -14,27 +15,63 @@ namespace IntroToLINQandASPLabs.Controllers
             return View(Context.Movies);
         }
 
+
+
         // GET: MovieController/Details/5
         public IActionResult GetMovieInfo(int movieid)
         {
-            if (movieid == 0) { return NotFound(); }
+            if (movieid == 0) { return View(); }
 
             Movie movie = Context.Movies.FirstOrDefault(m => m.Id == movieid);
-            if (movie == null) { return NotFound(); } else
+            if (movie == null) { return View(); } else
             {
                 return View(movie);
             }
         }
 
-        public IActionResult GetAllInGenre()
+        public IActionResult InGenre(string genre)
         {
+            List<string> genres = Enum.GetNames(typeof(Context.Genres)).ToList();
+            if (genres.Contains(genre, StringComparer.OrdinalIgnoreCase))
+            {
+                HashSet<Movie> moviesInGenre = Context.Movies.Where(m => m.Genre.ToString().ToLower() == genre.ToLower()).ToHashSet();
+                
+                    return View("Index", moviesInGenre);
 
-            return RedirectToAction("Index");
+                
+            } else
+            {
+                return RedirectToAction("Error");
+            }
+
+            /*
+             * 
+             * HashSet<Movie> moviesInGenre = Context.Movies.Where(m => m.Genre.ToString().ToLower() == genre.ToLower()).ToHashSet();
+             * if (moviesInGenre.Count > 0) {
+             * return View("Index", moviesInGenre)
+             * } else {
+             * return NotFound();
+             * }
+             */
         }
 
         public IActionResult GetCountInGenre()
         {
-            return View();
+            Dictionary<string,int> CountOfGenre = new Dictionary<string,int>();
+            foreach (Movie movie in Context.Movies)
+            {
+                string genre = movie.Genre.ToString();
+                if (CountOfGenre.Keys.Contains(genre))
+                {
+                    CountOfGenre[genre]++;
+                } else
+                {
+                    CountOfGenre[genre] = 1;
+                }
+            }
+
+
+            return View(CountOfGenre);
         }
 
         public IActionResult MoviesInBudget()
@@ -44,7 +81,9 @@ namespace IntroToLINQandASPLabs.Controllers
 
         public IActionResult MoviesInThe90s() 
         {
-            return View();
+            HashSet<Movie> In90s = Context.Movies.Where(m => m.ReleaseDate.Year >= 1990 && m.ReleaseDate.Year <= 2000).ToHashSet();
+            
+            return View("Index", In90s);
         }
        
 
