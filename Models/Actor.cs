@@ -54,6 +54,11 @@ namespace IntroToLINQandASPLabs.Models
             
         }
 
+        public Actor()
+        {
+            _id = Context.GetNextId();
+        }
+
         
     }
     

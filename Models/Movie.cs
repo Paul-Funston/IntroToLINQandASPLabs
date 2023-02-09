@@ -19,7 +19,8 @@ namespace IntroToLINQandASPLabs.Models
         public string Genre { get { return _genre; } }
 
         private readonly int _budget;
-        public int Budget { get { return _budget; } }
+        public int Budget { get { return _budget; }  }
+
         private int _averageRating;
         public int AverageRating { get; }
 
@@ -62,7 +63,19 @@ namespace IntroToLINQandASPLabs.Models
 
             _releaseDate = releaseDate;
 
-            _budget = budget;
+            if (budget > 0)
+            {
+                _budget = budget;
+            } else
+            {
+                throw new ArgumentException("Budget must be greater than 0.");
+            }
+        }
+
+        public Movie()
+        {
+            _id = Context.GetNextId();
+            _budget = 0;
         }
 
         
