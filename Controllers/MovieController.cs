@@ -97,7 +97,10 @@ namespace IntroToLINQandASPLabs.Controllers
         }
        
 
-       
+       public IActionResult CalculateOverallRating()
+        {
+
+        }
 
        
 
