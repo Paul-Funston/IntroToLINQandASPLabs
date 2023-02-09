@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using IntroToLINQandASPLabs.Models;
 using IntroToLINQandASPLabs.Data;
 using Microsoft.CodeAnalysis;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.View;
 
 namespace IntroToLINQandASPLabs.Controllers
 {
@@ -74,9 +75,18 @@ namespace IntroToLINQandASPLabs.Controllers
             return View(CountOfGenre);
         }
 
-        public IActionResult MoviesInBudget()
+        public IActionResult MoviesInBudget(int lower, int upper)
         {
-            return View();
+            HashSet<Movie> moviesWithinBudget = Context.Movies.Where(m => m.Budget >= lower && m.Budget <= upper).ToHashSet();
+            if(moviesWithinBudget.Count > 0)
+            {
+                return View("Index", moviesWithinBudget);
+
+            } else
+            {
+                return View("Index", new HashSet<Movie>());
+            }
+
         }
 
         public IActionResult MoviesInThe90s() 

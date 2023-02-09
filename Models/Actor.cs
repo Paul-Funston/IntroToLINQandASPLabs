@@ -24,10 +24,19 @@ namespace IntroToLINQandASPLabs.Models
             }
         }
 
-        public int GetHighestPay()
+        private int _totalEarned;
+        public int TotalEarned { get { return _totalEarned; }  }
+        public void GetEarnings()
         {
-            return _roles.Max(r => r.Salary);
+            int earnings = 0;
+            foreach (Role r in _roles) 
+            {
+                earnings += r.Salary;
+            }
+            _totalEarned = earnings;
         }
+
+        public int NumOfRoles { get { return _roles.Count; } }
 
         private HashSet<Role> _roles = new HashSet<Role>();
         public HashSet<Role> Roles { get { return _roles.ToHashSet(); } }
@@ -35,6 +44,7 @@ namespace IntroToLINQandASPLabs.Models
         public void AddRole(Role role)
         {
             _roles.Add(role);
+            GetEarnings();
         }
 
         public Actor( string name)

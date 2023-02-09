@@ -15,6 +15,13 @@
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
+            <th>
+                Num of Roles
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalEarned)
+            </th>
+            
             
         </tr>
     </thead>
@@ -25,6 +32,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumOfRoles)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalEarned)
+                <span>M</span>
+            </td>
+
+            
             
         </tr>
 }
@@ -33,5 +49,6 @@
 
 <div class="text-center">
     @Html.ActionLink("Highest Paid Actor", "HighestPaidActors")
+    @Html.ActionLink("Most Roles", "MostRoles")
 
 </div>

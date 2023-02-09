@@ -13,8 +13,14 @@ namespace IntroToLINQandASPLabs.Controllers
 
         public IActionResult HighestPaidActors()
         {
-            HashSet<Actor> orderedActors = Context.Actors.OrderBy(a => a.GetHighestPay()).ToHashSet();
-            return RedirectToAction("Index", orderedActors);
+            HashSet<Actor> orderedActors = Context.Actors.OrderByDescending(a => a.TotalEarned).ToHashSet();
+            return View("Index", orderedActors);
+        }
+
+        public IActionResult MostRoles()
+        {
+            HashSet<Actor> orderedActors = Context.Actors.OrderByDescending(a => a.NumOfRoles).ToHashSet();
+            return View("Index", orderedActors);
         }
 
     }

@@ -6,44 +6,66 @@
 
 <h1>Movies</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Genre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReleaseDate)
-            </th>
-            <th>
-                Details
-            </th>
-            
-        </tr>
-    </thead>
-    <tbody>
-        @foreach(Movie item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Genre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ReleaseDateShort)
-                </td>
-                <td>
-                    <a asp-action="GetMovieInfo" asp-route-movieid="@item.Id">Details</a>
-                </td>
+@{
+    if(Model == null)
+    {
+        <h3>No Movies Found</h3>
+    } else
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Genre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ReleaseDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Budget)
+                    </th>
+                    <th>
+                        Details
+                    </th>
 
-            </tr>
-        }
-    </tbody>
-</table>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Movie item in Model)
+                {
+                        <tr>
+                            <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                <a asp-action="InGenre" asp-route-genre="@item.Genre.ToString()">@item.Genre</a>
+                            </td>
+                            <td>
+                            @Html.DisplayFor(modelItem => item.ReleaseDateShort)
+                            </td>
+                            <td>
+                                <span>$</span>
+                            @Html.DisplayFor(modelItem => item.Budget)
+                                <span>Million </span>
+                            </td>
+                            <td>
+                                <a asp-action="GetMovieInfo" asp-route-movieid="@item.Id">Details</a>
+                            </td>
+
+                        </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
 
 
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+    <a asp-action="GetCountInGenre">By Genre</a>
+</div>

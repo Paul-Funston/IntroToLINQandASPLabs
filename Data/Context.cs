@@ -78,9 +78,9 @@ namespace IntroToLINQandASPLabs.Data
 
             Role roleOne = CreateRole(movieOne, actorOne, "Extra 1", 50);
             Role roleTwo = CreateRole(movieTwo, actorTwo, "Director", 150);
-            Role roleThree = CreateRole(movieThree, actorOne, "Lead Guy", 200);
-            Role roleFour = CreateRole(movieFour, actorThree, "Villain", 100);
-            Role roleFive = CreateRole(movieFive, actorFour,"Comedic Relief", 20);
+            Role roleThree = CreateRole(movieThree, actorOne, "Lead Guy", 150);
+            Role roleFour = CreateRole(movieFour, actorThree, "Villain", 500);
+            Role roleFive = CreateRole(movieFive, actorFour,"Comedic Relief", 100);
 
             User userOne = CreateUser("Greg");
             User userTwo = CreateUser("Spence");
