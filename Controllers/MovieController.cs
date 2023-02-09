@@ -26,6 +26,8 @@ namespace IntroToLINQandASPLabs.Controllers
             Movie movie = Context.Movies.FirstOrDefault(m => m.Id == movieid);
             if (movie == null) { return View(); } else
             {
+                decimal rating = CalculateOverallRating(movie);
+                ViewBag.Rating = rating;
                 return View(movie);
             }
         }
@@ -97,8 +99,16 @@ namespace IntroToLINQandASPLabs.Controllers
         }
        
 
-       public IActionResult CalculateOverallRating()
+       public decimal CalculateOverallRating(Movie movie)
         {
+            if (movie.Ratings.Any())
+            {
+                decimal average = movie.Ratings.Average(r => (decimal)r.Score);
+                return decimal.Round(average, 2);
+            } else
+            {
+                return 0;
+            }
 
         }
 

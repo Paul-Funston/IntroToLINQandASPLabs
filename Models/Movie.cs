@@ -35,6 +35,7 @@ namespace IntroToLINQandASPLabs.Models
             _roles.Add(role);
         }
         private HashSet<Rating> _rating = new HashSet<Rating>();
+        public HashSet<Rating> Ratings { get { return _rating.ToHashSet(); } }
 
         public void AddRating(Rating rating)
         {

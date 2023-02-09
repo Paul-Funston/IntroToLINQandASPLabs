@@ -7,7 +7,19 @@ namespace IntroToLINQandASPLabs.Models
         public int Id { get { return _id; } }
 
         private string _name;
-        public string Name { get { return _name;} }
+        public string Name { 
+            get { return _name;}
+            set
+            {
+                if (value.Length > 2 && value.Length <= 30)
+                {
+                    _name = value;
+                } else
+                {
+                    throw new Exception("Username must be three or more characters an cannot exceed 30.");
+                }
+            }
+        }
 
         private HashSet<Rating> _ratings = new HashSet<Rating>();
 
@@ -20,7 +32,13 @@ namespace IntroToLINQandASPLabs.Models
         public User( string name)
         {
             _id = Context.GetNextId();
-            _name = name;
+            Name = name;
+        }
+
+        public User()
+        {
+            _id= Context.GetNextId();
+
         }
     }
 }
