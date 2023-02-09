@@ -1,0 +1,56 @@
+﻿@model IntroToLINQandASPLabs.Models.Movie
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+@{
+    if(Model == null)
+    {
+        <h1> Movie Not Found</h1>
+    }
+    else
+    {
+        <div>
+            <h1>@Html.DisplayFor(model => model.Title)</h1>
+            <hr />
+            <dl class="row">
+
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ReleaseDate)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ReleaseDateShort)
+                </dd>
+
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Genre)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Genre)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Budget)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Budget)
+                    <span>M</span>
+                </dd>
+                <dt class="col-sm-2">
+                    Rating
+                </dt>
+                <dd class="col-sm-10">
+                    @ViewBag.Rating
+                </dd>
+            </dl>
+        </div>
+    }
+}
+
+<div>
+    
+    <a asp-action="Index">Back to List</a>
+</div>
