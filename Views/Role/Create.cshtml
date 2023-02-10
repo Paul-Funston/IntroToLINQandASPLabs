@@ -1,0 +1,35 @@
+﻿@model IntroToLINQandASPLabs.Models.ViewModels.CreateRoleVM
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Role</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="post">
+            <div>
+                <select asp-for="ActorId" asp-items="Model.Actors"></select>
+                <select asp-for="MovieId" asp-items="Model.Movies"></select>
+            </div>
+            <div>
+                <input asp-for="Title" placeholder="Credited Role" />
+
+                <label asp-for="Pay"></label>
+                <input asp-for="Pay" />
+
+            </div>
+
+            <input type="submit" value="Add Role" />
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
