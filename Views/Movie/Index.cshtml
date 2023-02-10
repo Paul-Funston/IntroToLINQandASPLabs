@@ -27,9 +27,7 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Budget)
                     </th>
-                    <th>
-                        Details
-                    </th>
+                   
 
                 </tr>
             </thead>
@@ -38,7 +36,8 @@
                 {
                         <tr>
                             <td>
-                            @Html.DisplayFor(modelItem => item.Title)
+                            <a asp-action="GetMovieInfo" asp-route-movieid="@item.Id">@item.Title</a>
+                            
                             </td>
                             <td>
                                 <a asp-action="InGenre" asp-route-genre="@item.Genre.ToString()">@item.Genre</a>
@@ -51,9 +50,7 @@
                             @Html.DisplayFor(modelItem => item.Budget)
                                 <span>Million </span>
                             </td>
-                            <td>
-                                <a asp-action="GetMovieInfo" asp-route-movieid="@item.Id">Details</a>
-                            </td>
+                           
 
                         </tr>
                 }

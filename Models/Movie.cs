@@ -31,6 +31,7 @@ namespace IntroToLINQandASPLabs.Models
         }
 
         private HashSet<Role> _roles = new HashSet<Role>();
+        public HashSet<Role> Roles { get { return _roles.ToHashSet(); } }
         public void AddRole(Role role)
         {
             _roles.Add(role);

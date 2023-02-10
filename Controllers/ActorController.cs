@@ -23,5 +23,17 @@ namespace IntroToLINQandASPLabs.Controllers
             return View("Index", orderedActors);
         }
 
+        public IActionResult Details(int actorid)
+        {
+            try
+            {
+                Actor actor = Context.Actors.First(a => a.Id == actorid);
+                return View(actor);
+            } catch (Exception ex)
+            {
+                return NotFound();
+            }
+            
+        }
     }
 }
