@@ -15,7 +15,7 @@ namespace IntroToLINQandASPLabs.Models
         private int _salary;
         public int Salary { get { return _salary; } }
 
-        public Role(int id, Actor actor, Movie movie, string title, int salary)
+        public Role(Actor actor, Movie movie, string title, int salary)
         {
             _id = Context.GetNextId();
             _actor = actor;

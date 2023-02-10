@@ -89,7 +89,53 @@
 
             </table>
         }
+        <div>
+            @if (Model.Ratings.Count > 0)
+            {
+                <h4>Ratings</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Ratings.First().User.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Ratings.First().Score)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Ratings.First().Comment)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Rating rating in Model.Ratings)
+                        {
+                            <tr>
+                                <td>
+                                    @rating.User.Name
+                                </td>
+                                <td>
+                                    @rating.Score
+                                </td>
 
+                                @if (String.IsNullOrEmpty(rating.Comment))
+                                {
+                                    <td>No Comment</td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        @rating.Comment
+                                    </td>
+                                }
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            }
+        </div>
 
 
     }
@@ -100,6 +146,7 @@
     <a asp-action="Index">Back to List</a> | 
     @if (Model != null)
     {
-        <a asp-action="Rate">Rate @Model.Title</a>
+       
+        <a asp-controller="Rating" asp-action="Create" asp-route-id="@Model.Id" asp-route-isActor="false">Rate @Model.Title</a>
     }
 </div>

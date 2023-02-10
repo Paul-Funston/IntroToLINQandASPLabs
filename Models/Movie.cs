@@ -21,14 +21,6 @@ namespace IntroToLINQandASPLabs.Models
         private readonly int _budget;
         public int Budget { get { return _budget; }  }
 
-        private int _averageRating;
-        public int AverageRating { get; }
-
-        public void CalculateAverageRating()
-        {
-            double average = _rating.Average(r => r.Score);
-            _averageRating = (int)average;
-        }
 
         private HashSet<Role> _roles = new HashSet<Role>();
         public HashSet<Role> Roles { get { return _roles.ToHashSet(); } }
@@ -42,7 +34,7 @@ namespace IntroToLINQandASPLabs.Models
         public void AddRating(Rating rating)
         {
             _rating.Add(rating);
-            CalculateAverageRating();
+            
         }
        
 

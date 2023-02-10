@@ -47,6 +47,15 @@ namespace IntroToLINQandASPLabs.Models
             GetEarnings();
         }
 
+        private HashSet<Rating> _rating = new HashSet<Rating>();
+        public HashSet<Rating> Ratings { get { return _rating.ToHashSet(); } }
+
+        public void AddRating(Rating rating)
+        {
+            _rating.Add(rating);
+
+        }
+
         public Actor( string name)
         {
             _id = Context.GetNextId();

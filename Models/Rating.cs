@@ -13,15 +13,21 @@ namespace IntroToLINQandASPLabs.Models
 
         private User _user;
         public User User { get { return _user; } }
-        private Movie _movie;
-        public Movie Movie { get { return _movie; } }
+
+        private string? _comment;
+        public string Comment { get { return _comment; } }
+        
 
 
-        public Rating ( Movie movie, User user, int score)
+        public Rating ( User user, int score, string? comment)
         {
             _id = Context.GetNextId();
-            _movie = movie;
             _user = user;
+
+            if(comment != null)
+            {
+                _comment = comment;
+            }
 
             if (score < 0 || score > 10)
             {
@@ -30,7 +36,32 @@ namespace IntroToLINQandASPLabs.Models
             {
                 _score = score;
             }
-            
+        }
+
+        public Rating()
+        {
+
+        }
+
+        public class MovieRating : Rating
+        {
+            private Movie _movie;
+            public Movie Movie { get { return _movie; } }
+            public MovieRating(Movie movie, User user, int score, string? comment) : base( user, score, comment)
+            {
+                _movie = movie;
+            }
+        }
+
+        public class ActorRating : Rating
+        {
+            private Actor _actor;
+            public Actor Actor { get { return _actor;} }
+
+            public ActorRating(Actor actor, User user, int score, string? comment) : base(user, score, comment)
+            {
+                _actor = actor;
+            }
         }
     }
 }

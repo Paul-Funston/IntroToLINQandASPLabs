@@ -49,19 +49,33 @@ namespace IntroToLINQandASPLabs.Data
             return newUser;
         }
 
-        private static Role CreateRole(Movie movie, Actor actor, string title, int salary)
+        public static Role CreateRole(Movie movie, Actor actor, string title, int salary)
         {
-            Role newRole = new Role(++_idCounter, actor, movie, title, salary);
+            Role newRole = new Role(actor, movie, title, salary);
             movie.AddRole(newRole);
             actor.AddRole(newRole);
             return newRole;
         }
-        private static Rating CreateRating(Movie movie, User user, int score)
+        public static Rating CreateRating(Movie movie, User user, int score, string? comment)
         {
-            Rating newRating = new Rating( movie, user, score);
+
+            // Should Validate that User has not rated movie already - modify instead
+            Rating newRating = new Rating.MovieRating( movie, user, score, comment);
             user.AddRating(newRating);
             movie.AddRating(newRating);
             return newRating;
+        }
+
+        
+
+        public static Rating CreateRating(Actor actor, User user, int score, string? comment)
+        {
+            // should validate that user has not rated actor already - modify instead
+            Rating newRating = new Rating.ActorRating(actor, user, score, comment);
+            user.AddRating(newRating);
+            actor.AddRating(newRating);
+            return newRating;
+
         }
         private static void _seedMethod()
         {
@@ -86,15 +100,15 @@ namespace IntroToLINQandASPLabs.Data
             User userTwo = CreateUser("Spence");
             User userThree = CreateUser("Jenny");
 
-            Rating ratingOne = CreateRating(movieOne, userOne, 5);
-            Rating ratingTwo = CreateRating(movieOne, userTwo, 8);
-            Rating ratingThree = CreateRating(movieOne, userThree, 9);
-            Rating ratingFour = CreateRating(movieTwo, userTwo, 1);
-            Rating ratingFive = CreateRating(movieTwo, userThree, 10);
-            Rating ratingSix = CreateRating(movieThree, userOne, 6);
-            Rating ratingSeven = CreateRating(movieFour, userOne, 3);
-            Rating ratingEight = CreateRating(movieFive, userOne, 6);
-            Rating ratingNine = CreateRating(movieFive, userThree, 2);
+            string? emptyString = "";
+            Rating ratingTwo = CreateRating(movieOne, userTwo, 8, emptyString);
+            Rating ratingThree = CreateRating(movieOne, userThree, 9, emptyString);
+            Rating ratingFour = CreateRating(movieTwo, userTwo, 1, emptyString);
+            Rating ratingFive = CreateRating(movieTwo, userThree, 10, emptyString);
+            Rating ratingSix = CreateRating(movieThree, userOne, 6, emptyString);
+            Rating ratingSeven = CreateRating(movieFour, userOne, 3, emptyString);
+            Rating ratingEight = CreateRating(movieFive, userOne, 6, emptyString);
+            Rating ratingNine = CreateRating(movieFive, userThree, 2, emptyString);
 
         }
 

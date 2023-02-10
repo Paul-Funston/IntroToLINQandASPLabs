@@ -29,7 +29,7 @@ namespace IntroToLINQandASPLabs.Controllers
             {
                 Actor actor = Context.Actors.First(a => a.Id == actorid);
                 return View(actor);
-            } catch (Exception ex)
+            } catch (Exception)
             {
                 return NotFound();
             }
