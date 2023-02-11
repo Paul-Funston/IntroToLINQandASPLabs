@@ -1,0 +1,125 @@
+﻿@model IntroToLINQandASPLabs.Models.Movie
+
+<div>
+    <h1>@Html.DisplayFor(model => model.Title)</h1>
+    <hr />
+    <dl class="row">
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReleaseDateShort)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Genre)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Genre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Budget)
+        </dt>
+        <dd class="col-sm-10">
+            <span>$</span>
+            @Html.DisplayFor(model => model.Budget)
+            <span>M</span>
+        </dd>
+        <dt class="col-sm-2">
+            Rating
+        </dt>
+        <dd class="col-sm-10">
+            @ViewBag.Rating
+        </dd>
+    </dl>
+</div>
+
+@if (Model.Roles.Count > 0)
+{
+
+    <h4>Roles</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Roles.First().Actor.Name)
+                </th>
+                <th>
+
+                    @Html.DisplayNameFor(model => model.Roles.First().Title)
+                </th>
+                <th>
+
+                    @Html.DisplayNameFor(model => model.Roles.First().Salary)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Role role in Model.Roles)
+            {
+                <tr>
+                    <td>
+                        <a asp-controller="Actor" asp-action="Details" asp-route-actorid="@role.Actor.Id">@role.Actor.Name</a>
+                    </td>
+                    <td>
+                        @role.Title
+                    </td>
+                    <td>
+                        <span>$</span>@role.Salary <span>Million</span>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+
+    </table>
+}
+<div>
+    @if (Model.Ratings.Count > 0)
+    {
+        <h4>Ratings</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Ratings.First().User.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Ratings.First().Score)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Ratings.First().Comment)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Rating rating in Model.Ratings)
+                {
+                    <tr>
+                        <td>
+                            @rating.User.Name
+                        </td>
+                        <td>
+                            @rating.Score
+                        </td>
+
+                        @if (String.IsNullOrEmpty(rating.Comment))
+                        {
+                            <td>No Comment</td>
+                        }
+                        else
+                        {
+                            <td>
+                                @rating.Comment
+                            </td>
+                        }
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+</div>
+

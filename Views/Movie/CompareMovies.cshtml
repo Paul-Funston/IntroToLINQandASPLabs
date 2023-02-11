@@ -1,0 +1,42 @@
+﻿@model IntroToLINQandASPLabs.Models.ViewModels.CompareMoviesVM
+
+@{
+    ViewData["Title"] = "CompareMovies";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>CompareMovies</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CompareMovies" method="post">
+            <div class="flex-row">
+                <select asp-for="MovieIdOne" asp-items="Model.Movies"></select>
+                <select asp-for="MovieIdTwo" asp-items="Model.Movies"></select>
+            </div>
+            <input type="submit" value="Compare" class="btn btn-primary"/>
+        </form>
+    </div>
+</div>
+
+
+<div class="flex-row text-center">
+    @if (Model.MovieOne != null)
+    {
+        <partial name="_MovieDetail" for="MovieOne"></partial>
+    }
+
+    @if(Model.MovieTwo != null)
+    {
+        <partial name="_MovieDetail" for="MovieTwo"></partial>
+    }
+   
+
+</div>
+
+
+
+<div>
+    
+    <a asp-action="Index">Back to List</a>
+</div>

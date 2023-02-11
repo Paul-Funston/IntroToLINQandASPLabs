@@ -4,6 +4,7 @@ using IntroToLINQandASPLabs.Models;
 using IntroToLINQandASPLabs.Data;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.View;
+using IntroToLINQandASPLabs.Models.ViewModels;
 
 namespace IntroToLINQandASPLabs.Controllers
 {
@@ -110,6 +111,22 @@ namespace IntroToLINQandASPLabs.Controllers
                 return 0;
             }
 
+        }
+
+        public IActionResult CompareMovies(string movieIdOne, string movieIdTwo)
+        {
+            
+            // create vm pass to view
+            CompareMoviesVM vm = new CompareMoviesVM(Context.Movies, movieIdOne, movieIdTwo);
+            
+            return View(vm);
+        }
+        [HttpPost]
+        public IActionResult CompareMovies([Bind("MovieIdOne", "MovieIdTwo")]CompareMoviesVM vm)
+        {
+            // get the Movie Id's from vm and send to Compare in objct
+
+            return RedirectToAction("CompareMovies", new {movieIdOne = vm.MovieIdOne, movieIdTwo = vm.MovieIdTwo});
         }
 
        
