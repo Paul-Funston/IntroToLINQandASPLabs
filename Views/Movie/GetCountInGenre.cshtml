@@ -1,0 +1,36 @@
+﻿@model IDictionary<string,int>;
+@{
+    ViewData["Title"] = "GetCountInGenre";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div>
+    <h1>GetCountInGenre</h1>
+    <hr />
+    <dl class="row">
+@{
+    foreach (KeyValuePair<string, int> pair in Model)
+    {
+        
+        <dt class="col-sm-2">
+           <a asp-action="InGenre" asp-route-genre="@pair.Key">@pair.Key</a>
+        </dt>
+         <dd class="col-sm-10">
+            @pair.Value
+         </dd>
+         <dd>
+                   
+         </dd>
+    }
+
+    
+}
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+
+</div>

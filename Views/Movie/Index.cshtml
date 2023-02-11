@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Movie>;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Movies</h1>
+
+@{
+    if(Model == null)
+    {
+        <h3>No Movies Found</h3>
+    } else
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Genre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ReleaseDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Budget)
+                    </th>
+                   
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Movie item in Model)
+                {
+                        <tr>
+                            <td>
+                            <a asp-action="GetMovieInfo" asp-route-movieid="@item.Id">@item.Title</a>
+                            
+                            </td>
+                            <td>
+                                <a asp-action="InGenre" asp-route-genre="@item.Genre.ToString()">@item.Genre</a>
+                            </td>
+                            <td>
+                            @Html.DisplayFor(modelItem => item.ReleaseDateShort)
+                            </td>
+                            <td>
+                                <span>$</span>
+                            @Html.DisplayFor(modelItem => item.Budget)
+                                <span>Million </span>
+                            </td>
+                           
+
+                        </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+
+
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+    <a asp-action="GetCountInGenre">By Genre</a>
+    <a asp-action="CompareMovies">Compare</a>
+</div>
